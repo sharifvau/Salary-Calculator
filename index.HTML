@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Salary Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #e8f0fe;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      max-width: 450px;
+      margin: auto;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #34495e;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #27ae60;
+      border: none;
+      color: white;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #219150;
+    }
+    .result {
+      margin-top: 20px;
+      background: #dff9fb;
+      padding: 15px;
+      border-radius: 10px;
+      color: #2d3436;
+      font-size: 18px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Salary Calculator</h2>
+
+  <label>Monthly Salary (Base):</label>
+  <input type="number" id="basicSalary" placeholder="e.g. 2000">
+
+  <label>Overtime Hours:</label>
+  <input type="number" id="overtimeHours" placeholder="e.g. 10">
+
+  <label>Per Hour Rate:</label>
+  <input type="number" id="hourlyRate" placeholder="e.g. 15">
+
+  <label>Bonus (Optional):</label>
+  <input type="number" id="bonus" placeholder="e.g. 500">
+
+  <label>Deduction (Optional):</label>
+  <input type="number" id="deduction" placeholder="e.g. 200">
+
+  <button onclick="calculateSalary()">Calculate Total Salary</button>
+
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  function calculateSalary() {
+    const basic = parseFloat(document.getElementById("basicSalary").value) || 0;
+    const hours = parseFloat(document.getElementById("overtimeHours").value) || 0;
+    const rate = parseFloat(document.getElementById("hourlyRate").value) || 0;
+    const bonus = parseFloat(document.getElementById("bonus").value) || 0;
+    const deduction = parseFloat(document.getElementById("deduction").value) || 0;
+
+    const overtimePay = hours * rate * 1.5;
+    const total = basic + overtimePay + bonus - deduction;
+
+    document.getElementById("result").innerHTML = `
+      Basic Salary: ${basic.toFixed(2)}<br>
+      Overtime Pay: ${overtimePay.toFixed(2)}<br>
+      Bonus: ${bonus.toFixed(2)}<br>
+      Deduction: ${deduction.toFixed(2)}<br><br>
+      <strong>Total Salary: ${total.toFixed(2)}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
